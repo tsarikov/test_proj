@@ -15,17 +15,14 @@ def is_matrix(matrix):
 
 def possibility(matrix_A, matrix_B):
     return len(matrix_A[0]) == len(matrix_B) and True # проверяем равно ли количество столбцов 1-матрицы и кол-во строк во второй
-    
-
 
 def multiply_matrix(matrix_A: list, matrix_B: list) -> list:
     matr_A_lines = len(matrix_A)
     matr_B_lines = len(matrix_B)
     matr_A_rows = len(matrix_A[0])
     matr_B_rows = len(matrix_B[0])
-    sum = 0
     result = [[0 for x in range(matr_B_rows)] for y in range(matr_A_lines)]
-    print
+    
     # if is_matrix(matrix_A) and is_matrix(matrix_B) and possibility(matrix_A, matrix_B):
     if possibility(matrix_A, matrix_B):
         for i in range(matr_A_rows):
