@@ -1,4 +1,5 @@
-line = [1, 2, '+', 4, '*', 3, '+']
-
-if line[2] in line:
-    print('Yes')
+testing = (1,2,3,4)
+print(type(testing))
+list_tu = list(testing)
+print(type(list_tu))
+print(list_tu)

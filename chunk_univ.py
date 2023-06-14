@@ -3,23 +3,23 @@ def chunk_f(slot: int, given_expression) -> list:
     given_len = len(given_expression)
     working_expression = list(given_expression)
     
+    chunk(slot, working_expression, given_len, given_type)
     
     
-    
-    match given_type:
-        case "<class 'str'>":
-            print(given_type, given_expression)
-            return chunk_str(slot, given_expression)
+    # match given_type:
+    #     case "<class 'str'>":
+    #         print(given_type, given_expression)
+    #         return chunk_str(slot, given_expression)
             
 
-        case "<class 'list'>":
-            return chunk_list(slot, given_expression)
+    #     case "<class 'list'>":
+    #         return chunk_list(slot, given_expression)
         
-        case "<class 'tuple'>":
-            pass 
+    #     case "<class 'tuple'>":
+    #         pass 
         
-        case "<class 'set'>":
-            pass
+    #     case "<class 'set'>":
+    #         pass
 
 # def chunk_str(slot, str_expression):
 #     ''' Обработка строкового типа. 
@@ -62,6 +62,32 @@ def chunk_f(slot: int, given_expression) -> list:
 
 def chunk_list(slot, list_expression):
     pass
+
+def chunk(slot, working_expression, given_len, given_type):
+    if given_len <= slot:
+        result_list = []
+        result_list.append(type(given_type, working_expression))
+        return result_list
+    else:
+        result_list = []
+        work_list = []
+        counter = str_len // slot
+        str_list = list(str_expression)
+
+        i = 0
+        while i < counter:
+            work_list = []
+            for j in range(slot):
+                work_list.append(str_list[i*slot+j])
+            result_list.append(''.join(work_list))
+            i += 1
+        
+        if str_len % slot != 0:
+            work_list = []
+            for j in range(i * slot, str_len):
+                work_list.append(str_list[j])
+            result_list.append(''.join(work_list))
+        return result_list
 
 
 print(chunk_f(10, 'skjvhskj'))

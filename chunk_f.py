@@ -14,7 +14,7 @@ def chunk_f(slot: int, given_expression) -> list:
             return chunk_list(slot, given_expression, given_len)
         
         case "<class 'tuple'>":
-            pass 
+            return chunk_tuple(slot, given_expression, given_len) 
         
         case "<class 'set'>":
             pass
@@ -66,23 +66,38 @@ def chunk_list(slot, list_expression, given_len):
         result_list = []
         work_list = []
         counter = given_len // slot
-        main_list = list.copy(list_expression)
-    
+            
         i = 0
         while i < counter:
             work_list = []
             for j in range(slot):
-                work_list.append(main_list[i*slot+j])
+                work_list.append(list_expression[i*slot+j])
             result_list.append(work_list)
             i += 1
         
         if given_len % slot != 0:
             work_list = []
             for j in range(i * slot, given_len):
-                work_list.append(main_list[j])
+                work_list.append(list_expression[j])
             result_list.append(work_list)
+        return result_list
+
+def chunk_tuple(slot, tuple_expression, given_len):
+    if given_len <= slot:
+        result_list = []
+        result_list.append(tuple_expression)
+        return result_list
+    else:
+        result_list = []
+        l_tuple_expression = list(tuple_expression)
+        l_tuple_chunked = chunk_list(slot, l_tuple_expression, given_len)
+        for item in l_tuple_chunked:
+            result_list.append(tuple(item))
+            
+        
         return result_list
 
 
 print(chunk_f(10, 'skjvhskjerruh eor eorh'))
 print(chunk_f(10, [1,12,13,4,6,11,54,23,345,23,1,12,13,4,6,11,54,23,345,23]))
+print(chunk_f(1, (1,12,13,4,6,11,54,23,345,23,1,12,13,4,6,11)))
